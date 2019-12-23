@@ -7,6 +7,8 @@ Wizards is an app based on Express, MongoDB
 
 ![](/screenshot.png)
 
+</div>
+
 ## Quick Start
 
 ```bash
@@ -22,5 +24,3 @@ npm start
 
 # Server runs on http://localhost:3000
 ```
-
-</div>
