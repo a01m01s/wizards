@@ -1,0 +1,24 @@
+header
+    .collapse.bg-dark#navbarHeader
+        .container
+            .row
+                .col-sm-8.col-md-7.py-4
+                    h4.text-white Wizards
+                    p.text-muted Add some information about the album below 
+                .col-sm-4.offset-md-1.py-4
+                    h4.text-white Contact
+                    ul.list-unstyled
+                        li
+                            a.text-white(href="#") Download App
+                        li
+                            a.text-white(href="/login") Login
+                        li
+                            a.text-white(href="#") SignUp
+    
+    .navbar.navbar-dark.bg-dark.shadow-sm
+        .container.d-flex.justify-content-between
+            a.navbar-brand.d-flex.align-items-center(href="#")
+                img(src="/img/logo-black.png" width="40px" style="filter: brightness(0) invert(1);")
+            button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation")
+                span.navbar-toggler-icon
+

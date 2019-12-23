@@ -1,0 +1,23 @@
+extends base
+
+block content
+ 
+        .container.mt-5
+            .row 
+                each post in posts
+                    .col.mb-2
+                        .card(style="width:18rem;")
+                            img.card-img-top(src="/img/castle.jpg" alt="")
+                            .card-body
+                                h5.card-title= post.name
+                                p.card-text= post.summary 
+                                a.btn.btn-secondary(href=`/posts/${post.slug}`) More...
+
+
+
+
+//- built in loop is pu
+//- each post in posts
+//- p= post.name
+//- each post,i in posts
+    

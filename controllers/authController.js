@@ -1,4 +1,3 @@
-// NOTE i didn't check this file
 const crypto = require('crypto');
 const { promisify } = require('util');
 const User = require('./../models/userModel');
@@ -83,6 +82,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
   if (!token) {
     return next(
@@ -113,6 +114,31 @@ exports.protect = catchAsync(async (req, res, next) => {
   // Grant access to protected route
 
   req.user = currentUser;
+  next();
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+
+    const currentUser = await User.findById(decoded.id);
+
+    if (!currentUser) {
+      return next();
+    }
+
+    // iat:: issued at
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
+    // Grant access to protected route
+
+    res.locals.user = currentUser;
+    return next();
+  }
   next();
 });
 

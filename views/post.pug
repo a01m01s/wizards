@@ -1,0 +1,34 @@
+extends base
+include _commentCard
+block content
+    .container.mt-5
+        img.img-fluid.rounded.mb-3(src="/img/castle.jpg")
+        h2.text-left.ml-3= post.name
+        .ml-5
+            .d-flex
+                .p-2.flex-grow-1
+                    img.img-fluid.rounded-circle(src="/img/profile.png" width="100px")
+                    - const date = post.createdAt.toLocaleString('en-us',{month:'long',year:'numeric'});
+                     p.d-inline-flex.ml-2= `Difficulty ${post.difficulty} | Rating ${post.ratingsAverage} | ${date}`
+                .p-2
+                    p hello
+        .row
+            .jumbotron.jumbotron-fluid.col-md-12
+                .container
+                    h1.display-6 summary
+                    p.lead.p-2= post.summary
+            .col-md-12.text-center
+                h1 ...
+            .px-5.post_content
+                p= post.content
+            
+            each comment in post.comments
+                +commentCard(comment)
+                    
+
+            
+    //- Mixins:
+    //- mixin name(arguments)
+    //-     .....
+    //- using mixin
+    //- +mixinName()

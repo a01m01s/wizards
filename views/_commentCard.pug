@@ -1,0 +1,14 @@
+mixin commentCard(comment)
+    .col-md-12
+        .card.border-secondary.mb-3(style="max-width=18rem;")
+            //- .card-header.bg-transparent.border-secondary title
+            .card-body.text-secondary
+                .d-flex.justify-content-start.align-items-center
+                    img.img-fluid.rounded-circle.m-2(src="/img/profile.png" width="70px")
+                    h5.card-title.m-2= comment.user.name
+                p.card-text= comment.comment
+            .card-footer.bg-transparent.border-secondary
+                each star in [1,2,3,4,5]
+                    span.d-inline(style=`${comment.rating>=star ? '' : 'filter: grayscale(100%);' }`) ⭐
+            
+

@@ -12,8 +12,16 @@ const globalErrorHandler = require('./controllers/errorController');
 const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
+const viewRouter = require('./routes/viewRoutes');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
+
+app.set('trust proxy', 1);
+
+app.use(cors());
+// app.options('*', cors());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +46,8 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
 app.use(mongoSanitize());
 
 app.use(xss());
@@ -48,7 +58,6 @@ app.use(
       'duration',
       'ratingsQuantity',
       'ratingsAverage',
-      'maxGroupSize',
       'difficulty',
       'price'
     ]
@@ -57,6 +66,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', viewRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
