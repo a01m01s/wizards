@@ -10,10 +10,14 @@ header
                     ul.list-unstyled
                         li
                             a.text-white(href="#") Download App
-                        li
-                            a.text-white(href="/login") Login
-                        li
-                            a.text-white(href="#") SignUp
+                        if user
+                            li
+                                a.text-white.logout(href="/logout") logout
+                        else
+                            li
+                                a.text-white(href="/login") Login
+                            li
+                                a.text-white(href="#") SignUp
     
     .navbar.navbar-dark.bg-dark.shadow-sm
         .container.d-flex.justify-content-between
